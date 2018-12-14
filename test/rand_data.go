@@ -13,7 +13,6 @@ import (
 	"time"
 
 	"jerrysd.cn/algorithm/array/sort"
-	"jerrysd.cn/algorithm/test"
 )
 
 // TestRand rand values for sort
@@ -84,7 +83,7 @@ func ReadArrayFromFile(fileName string) []int {
 
 // Test_insertionSort
 func Test_InsertionSort(t *testing.T) {
-	arr := test.ReadArrayFromFile("resource/input2.txt")
+	arr := ReadArrayFromFile("resource/input2.txt")
 
 	tu := time.Now()
 	sort.Debug = true

@@ -2,6 +2,7 @@ package sort
 
 import (
 	"fmt"
+	"time"
 )
 
 // IntsInsertSort insert sort
@@ -37,4 +38,36 @@ func insertSort(in Compareble) {
 	if Debug {
 		fmt.Printf("times :[%d]\n", times)
 	}
+}
+
+// IntsShaleSort 希尔排序
+func IntsShellSort(in []int) {
+	shellSort(IntSlice(in))
+}
+
+func shellSort(in Compareble) {
+
+	var l = in.Len()
+	var h = shaleDivIndex(l)
+
+	tu := time.Now()
+	for h >= 1 {
+		for i := 0; i < l; i++ {
+			for j := i; j >= h && in.More(j-h, j); j -= h {
+				in.Swap(j, j-h)
+			}
+		}
+		h = h / 3
+	}
+	if Debug {
+		fmt.Printf("use time %v \n", time.Now().Sub(tu))
+	}
+}
+
+func shaleDivIndex(l int) int {
+	h := 1
+	for h < l/3 {
+		h = 3*h + 1
+	}
+	return h
 }
