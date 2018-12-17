@@ -10,13 +10,6 @@ import (
 	"jerrysd.cn/algorithm/tree"
 )
 
-func TestCreateAvl(t *testing.T) {
-
-	avl := tree.NewAVLTree()
-	avl.Put(1)
-	t.Log(avl)
-}
-
 func TestNodeTree(t *testing.T) {
 	node := &tree.Node{}
 	t.Log(node)
@@ -40,4 +33,17 @@ func TestBST(t *testing.T) {
 	fmt.Println(strings.Repeat("-", 20))
 	btree.Remove(19)
 	ffmt.Pjson(btree)
+}
+
+func TestAVLTree(t *testing.T) {
+	t.Log("ok")
+	avl := tree.NewAVLTree()
+
+	avl.Insert(2)
+	avl.Insert(1)
+	avl.Insert(3)
+	avl.Insert(4)
+
+	ffmt.Pjson(avl)
+	t.Log(avl)
 }

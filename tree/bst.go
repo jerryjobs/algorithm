@@ -68,10 +68,10 @@ func (t *nodeBST) Search(key int) (ok bool, node *nodeBST) {
 
 //Insert insert new key
 func (t *nodeBST) Insert(key int) *nodeBST {
-	if t.parent == nil {
-		t.Key = key
-		return t
-	}
+	// if t.parent == nil {
+	// 	t.Key = key
+	// 	return t
+	// }
 	if key < t.Key {
 		if t.Left == nil {
 			t.Left = NewBSTree(key)

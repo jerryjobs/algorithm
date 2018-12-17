@@ -32,13 +32,83 @@ type AVLTreeType interface {
 
 // AVLTree struct of tree node
 type avlTree struct {
-	nodeBST
-	Left, Right *avlTree
-	height      int
+	Key                 int
+	Left, Right, parent *avlTree
+	height              int
 }
 
 func NewAVLTree() *avlTree {
+	return &avlTree{}
+}
+
+func NewAVLTreeWith(key int) *avlTree {
 	return &avlTree{
-		nodeBST: nodeBST{},
+		Key: key,
 	}
+}
+
+// Max max of node bst
+func (t *avlTree) Max() *avlTree {
+	if t.Left == nil && t.Right == nil {
+		return t
+	}
+	if t.Right != nil {
+		return t.Right.Max()
+	} else {
+		return t.Right
+	}
+}
+
+// Min of node bst
+func (t *avlTree) Min() *avlTree {
+	if t.Left == nil && t.Right == nil {
+		return t
+	}
+	if t.Left != nil {
+		return t.Left.Min()
+	} else {
+		return t.Right.Min()
+	}
+}
+
+func (t *avlTree) Search(key int) (ok bool, node *avlTree) {
+	if key < t.Key {
+		if t.Left == nil {
+			return false, nil
+		}
+		return t.Left.Search(key)
+	} else if key > t.Key {
+		if t.Right == nil {
+			return false, nil
+		}
+		return t.Right.Search(key)
+	} else {
+		return true, t
+	}
+}
+
+//Insert insert new key
+func (t *avlTree) Insert(key int) *avlTree {
+	// if t.parent == nil {
+	// 	t.Key = key
+	// 	return t
+	// }
+	if key < t.Key {
+		if t.Left == nil {
+			t.Left = NewAVLTreeWith(key)
+			t.Left.parent = t
+			return t.Left
+		} else {
+			return t.Left.Insert(key)
+		}
+	} else if key > t.Key {
+		if t.Right == nil {
+			t.Right = NewAVLTreeWith(key)
+			t.Right.parent = t
+			return t.Right
+		} else {
+			t.Right.Insert(key)
+		}
+	}
+	return t
 }
